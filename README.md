@@ -9,6 +9,6 @@ bot telegram discourse
 > npm i
 > node index.js 
 or 
-> npm star
+> npm start
 
 ```
