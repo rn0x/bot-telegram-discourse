@@ -1,0 +1,20 @@
+{
+  "name": "bot-telegram-discourse",
+  "version": "1.0.0",
+  "description": "Bot Telegram Discourse",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan almalki",
+  "license": "AGPL",
+  "dependencies": {
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.0.0",
+    "moment-timezone": "^0.5.33",
+    "node-fetch": "^3.0.0",
+    "telegraf": "^4.4.1"
+  }
+}
