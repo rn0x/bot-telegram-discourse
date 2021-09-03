@@ -20,11 +20,11 @@ console.log(figlet.textSync('Bot Discours'));
 console.log('-----------------------------------------------------------');
 console.log("                     Start " + moment.tz("Asia/Riyadh").format('hh:mm'))
 
-setInterval(async function(){ 
+setInterval(function(){ 
   const method =  'GET'
   const body = JSON.stringify()
 
-  await fetch(`${API_URL}/latest.json`, { method, headers, body })
+  fetch(`${API_URL}/latest.json`, { method, headers, body })
     .then(response => response.json())
     .then(async (data) => {
 
@@ -42,7 +42,7 @@ setInterval(async function(){
         .catch((error) => {
           let del = userid.indexOf(error.on.payload.chat_id);
           userid.splice(del, 1)
-          fs.writeFileSync('./data/userid.json', JSON.stringify(userid))
+          fs.writeFileSync('./lib/userid.json', JSON.stringify(userid))
           console.log('delete :' + error.on.payload.chat_id)
         }); 
       }
@@ -53,7 +53,6 @@ setInterval(async function(){
 
   } , 60000);
 
-
   bot.start((ctx) => {
     var wel = `مرحبا ${ctx.message.from.first_name} 👋 \n\n\n`
     wel += `أسس (أُسُس) تهدف إلى الإثراء في البرمجيات الحرة والمفتوحة المصدر في الوطن العربي\n`
@@ -63,7 +62,7 @@ setInterval(async function(){
 
     if (!userid.includes(ctx.chat.id)) {
       userid.push(ctx.chat.id);
-      fs.writeFileSync('./data/userid.json', JSON.stringify(userid))
+      fs.writeFileSync('./lib/userid.json', JSON.stringify(userid))
       console.log('save :' + ctx.chat.id)
     }
   
@@ -73,29 +72,37 @@ setInterval(async function(){
 
 
   bot.command('reply', (ctx) => {
-    const pid = ctx.message.reply_to_message.text.split('➸ post id : ')[1]
-    const fname = `${ctx.message.from.first_name}:\n\n`
-    const comnt = ctx.message.text.slice(6)
-    const method =  'POST'
-    const body = JSON.stringify({"raw": fname+comnt,"topic_id": pid})
     
+    ctx.reply('من فضلك قم بالرد على رابط الموضوع بـ /reply مع الرد')
 
-    fetch(`${API_URL}/posts.json`, { method, headers, body }).then(response => response.json())
-    .then(async (data) => {
+    if (ctx.message.text && ctx.message.reply_to_message){
+      const pid = ctx.message.reply_to_message.text.split('➸ post id : ')[1]
+      const fname = `${ctx.message.from.first_name}:\n\n`
+      const comnt = ctx.message.text.slice(6)
+      const method =  'POST'
+      const body = JSON.stringify({"raw": fname+comnt,"topic_id": pid})
+
+      fetch(`${API_URL}/posts.json`, { method, headers, body }).then(response => response.json())
+      .then(async (data) => {
 
       if (data.action === 'create_post' && data.errors[0]){
         await ctx.reply(data.errors[0]);
       }
+
       else {ctx.reply('✅')}
-    })
+
+      })
+
+    }
     
-  }).catch((erro) => { console.log(' ')});
+  })
   
-  bot.command('topis', async (ctx) => {
+  
+  bot.command('topis', (ctx) => {
     const method =  'GET'
     const body = JSON.stringify()
     
-    await fetch(`${API_URL}/latest.json`, { method, headers, body }).then(response => response.json())
+    fetch(`${API_URL}/latest.json`, { method, headers, body }).then(response => response.json())
     .then(async (data) => {
     
     const url = `${API_URL}/t/${data.topic_list.topics[0].slug}/${data.topic_list.topics[0].id}\n\n\n`;
