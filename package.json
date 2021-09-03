@@ -1,6 +1,6 @@
 {
   "name": "bot-telegram-discourse",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Bot Telegram Discourse",
   "main": "index.js",
   "type": "module",
@@ -8,7 +8,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ryan almalki",
+  "author": "rn0x",
   "license": "AGPL-3.0",
   "dependencies": {
     "figlet": "^1.5.2",
@@ -16,5 +16,22 @@
     "moment-timezone": "^0.5.33",
     "node-fetch": "^3.0.0",
     "telegraf": "^4.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rn0x/bot-telegram-discourse.git"
+  },
+  "keywords": [
+    "bot",
+    "telegram",
+    "telegraf",
+    "discourse",
+    "discourse",
+    "api",
+    "بوت"
+  ],
+  "bugs": {
+    "url": "https://github.com/rn0x/bot-telegram-discourse/issues"
+  },
+  "homepage": "https://github.com/rn0x/bot-telegram-discourse#readme"
 }
