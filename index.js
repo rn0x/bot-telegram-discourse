@@ -42,7 +42,7 @@ setInterval(function(){
         .catch((error) => {
           let del = userid.indexOf(error.on.payload.chat_id);
           userid.splice(del, 1)
-          fs.writeFileSync('./lib/userid.json', JSON.stringify(userid))
+          fs.writeFileSync('./data/userid.json', JSON.stringify(userid))
           console.log('delete :' + error.on.payload.chat_id)
         }); 
       }
@@ -62,7 +62,7 @@ setInterval(function(){
 
     if (!userid.includes(ctx.chat.id)) {
       userid.push(ctx.chat.id);
-      fs.writeFileSync('./lib/userid.json', JSON.stringify(userid))
+      fs.writeFileSync('./data/userid.json', JSON.stringify(userid))
       console.log('save :' + ctx.chat.id)
     }
   
