@@ -23,3 +23,24 @@ or
 > npm start
 
 ```
+
+
+  
+|        ✅        |              Command           |
+| :-------------: | :------------------------------: | 
+|       ✅        | /start                           |
+|       ✅        | /reply                           |
+|       ✅        | /topis                           |
+    
+
+
+
+<p align="center">
+  <img align="center" src="/1.jpg" alt="Logo" width="360" height="756">
+</p>
+
+# 
+
+<p align="center">
+  <img align="center" src="/2.jpg" alt="Logo" width="360" height="1199">
+</p>
