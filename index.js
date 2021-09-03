@@ -20,11 +20,11 @@ console.log(figlet.textSync('Bot Discours'));
 console.log('-----------------------------------------------------------');
 console.log("                     Start " + moment.tz("Asia/Riyadh").format('hh:mm'))
 
-setInterval(function(){ 
+setInterval(async function(){ 
   const method =  'GET'
   const body = JSON.stringify()
 
-  fetch(`${API_URL}/latest.json`, { method, headers, body })
+  await fetch(`${API_URL}/latest.json`, { method, headers, body })
     .then(response => response.json())
     .then(async (data) => {
 
@@ -37,6 +37,7 @@ setInterval(function(){
     const postid = `➸ post id : ${data.topic_list.topics[0].id}\n`;
 
     if ( ptime === time ) {
+      console.log (`${API_URL}/t/${data.topic_list.topics[0].slug}/${data.topic_list.topics[0].id}\n ${username}`)
       for (let lop of userid) {
         await bot.telegram.sendMessage(lop, url + title + username + postid)
         .catch((error) => {
