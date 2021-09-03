@@ -28,15 +28,23 @@ setInterval(async function(){
     .then(response => response.json())
     .then(async (data) => {
 
-    const pcreat = data.topic_list.topics[0].created_at;
-    const time = moment.tz("Asia/Riyadh").format('YYYY-MM-DDTHH:mm');
-    const ptime = moment.tz(pcreat, "Asia/Riyadh").format('YYYY-MM-DDTHH:mm')
+    const posttime = data.topic_list.topics[0].created_at;
+    const Y = moment.tz("Asia/Riyadh").format('YYYY');
+    const M = moment.tz("Asia/Riyadh").format('M')
+    const D = moment.tz("Asia/Riyadh").format('D')
+    const H = moment.tz("Asia/Riyadh").format('HH')
+    const MI = moment.tz("Asia/Riyadh").format('mm')
+    const PY = moment.tz(posttime, "Asia/Riyadh").format('YYYY')
+    const PM = moment.tz(posttime, "Asia/Riyadh").format('M')
+    const PD = moment.tz(posttime, "Asia/Riyadh").format('D')
+    const PH = moment.tz(posttime, "Asia/Riyadh").format('HH')
+    const PMI = moment.tz(posttime, "Asia/Riyadh").format('mm')
     const url = `${API_URL}/t/${data.topic_list.topics[0].slug}/${data.topic_list.topics[0].id}\n\n\n`;
     const title = `${data.topic_list.topics[0].title}\n\n`;
     const username = `➸ User : ${data.topic_list.topics[0].last_poster_username}\n`;
     const postid = `➸ post id : ${data.topic_list.topics[0].id}\n`;
 
-    if ( ptime === time ) {
+    if ( PY === Y && PM === M && PD === D && PH === H && PMI === MI ) {
       for (let lop of userid) {
         await bot.telegram.sendMessage(lop, url + title + username + postid)
         .catch((error) => {
