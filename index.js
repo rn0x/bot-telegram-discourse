@@ -72,10 +72,14 @@ setInterval(function(){
 
 
   bot.command('reply', (ctx) => {
-    
-    ctx.reply('من فضلك قم بالرد على رابط الموضوع بـ /reply مع الرد')
 
-    if (ctx.message.text && ctx.message.reply_to_message){
+    if (ctx.message.text && !ctx.message.reply_to_message){
+
+      ctx.reply('من فضلك قم بالرد على رابط الموضوع بـ /reply مع الرد')
+
+    }
+    
+    else if (ctx.message.text && ctx.message.reply_to_message){
       const pid = ctx.message.reply_to_message.text.split('➸ post id : ')[1]
       const fname = `${ctx.message.from.first_name}:\n\n`
       const comnt = ctx.message.text.slice(6)
@@ -94,7 +98,7 @@ setInterval(function(){
       })
 
     }
-    
+
   })
   
   
